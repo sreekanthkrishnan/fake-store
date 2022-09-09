@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context/Store";
 
 function ProductSinglePage() {
     const { id } = useParams();
-    const { state } = useContext(Context);
-    const products = state.products;
+
+    const products = useSelector((state) => state.allProducts.products);
     const [item, setItem] = useState("");
     console.log(products, id, item);
 

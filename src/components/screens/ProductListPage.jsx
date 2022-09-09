@@ -4,10 +4,11 @@ import { Context } from "../context/Store";
 import NavBar from "../includes/product-list-page/NavBar";
 import ProductCard from "../includes/product-list-page/ProductCard";
 import ReactPaginate from "react-paginate";
+import { useSelector } from "react-redux";
 
 function ProductListPage() {
-    const { state } = useContext(Context);
-    const product = state.products;
+    const product = useSelector((state) => state.allProducts.products);
+    console.log(product, "hyy product");
     const [items, setItems] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [category, setCategory] = useState("");
@@ -67,9 +68,6 @@ function ProductListPage() {
         const newOffset = (event.selected * itemsPerPage) % items.length;
         setItemOffset(newOffset);
     };
-
-    console.log(currentItems, "curre");
-    console.log(items, "items");
 
     return (
         <Container>

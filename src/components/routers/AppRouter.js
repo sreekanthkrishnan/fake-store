@@ -1,24 +1,22 @@
 import React, { useContext, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { apiConfig } from "../../axiosConfig";
-import { Context } from "../context/Store";
+import { setProducts } from "../../redux/actions/productActions";
+// import { updateCartItem } from "../../redux/productStore";
 import Header from "../general/components/Header";
 import ProductPage from "../screens/ProductPage";
 import ProductSinglePage from "../screens/ProductSinglePage";
 
 function AppRouter() {
-    const { state, dispatch } = useContext(Context);
+    const dispatch = useDispatch();
 
     const fetchProductData = () => {
         apiConfig.get("products").then((res) => {
             const { status, data } = res;
             if (status === 200) {
-                // console.log(data);
-                dispatch({
-                    type: "UPDATE_PRODUCTS",
-                    products: data,
-                });
+                dispatch(setProducts(data));
             }
         });
     };
